@@ -42,10 +42,12 @@ function onError(error){
 function fetchData(){
     infoTxt.innerText = "Getting weather details...";
     infoTxt.classList.add("pending");
-    fetch(api).then(res => res.json()).then(result => weatherDetails(result)).catch(() =>{
-        infoTxt.innerText = "Something went wrong";
-        infoTxt.classList.replace("pending", "error");
-    });
+    fetch(api)
+        .then(res => res.json())
+        .then(result => weatherDetails(result)).catch(() =>{
+            infoTxt.innerText = "Something went wrong";
+            infoTxt.classList.replace("pending", "error");
+        });
 }
 
 function weatherDetails(info){
@@ -81,9 +83,47 @@ function weatherDetails(info){
         infoTxt.innerText = "";
         inputField.value = "";
         wrapper.classList.add("active");
+    
+//     weatherbox.innerHTML = <section class="weather-part">
+//     <img src="" alt="Weather Icon">
+//     <div class="temp">
+//       <span class="numb">_</span>
+//       <span class="deg">°</span>C
+//     </div>
+//     <div class="weather">_ _</div>
+//     <div class="location">
+//       <i class='bx bx-map'></i>
+//       <span>_, _</span>
+//     </div>
+//     <div class="bottom-details">
+//       <div class="column feels">
+//         <i class='bx bxs-thermometer'></i>
+//         <div class="details">
+//           <div class="temp">
+//             <span class="numb-2">_</span>
+//             <span class="deg">°</span>C
+//           </div>
+//           <p>Feels like</p>
+//         </div>
+//       </div>
+//       <div class="column humidity">
+//         <i class='bx bxs-droplet-half'></i>
+//         <div class="details">
+//           <span>_</span>
+//           <p>Humidity</p>
+//         </div>
+//       </div>
+//     </div>
+//   </section>
     }
 }
+
+let locationIcon = document.querySelector('.weather-icon');
+const {icon} = data.weather[0];
+locationIcon.innerHTML = `<img src="icons/${icon}.png">`;
 
 arrowBack.addEventListener("click", ()=>{
     wrapper.classList.remove("active");
 });
+
+
